@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-navy: #0c1222;
+  --color-ink: #121826;
+  --color-muted: #5c6570;
+  --color-paper: #f6f5f2;
+  --color-hairline: #e6e4df;
+  --color-teal: #0f766e;
+  --color-teal-hover: #0c5f59;
+  --color-emerald: #047857;
+  --radius-button: 10px;
+  --radius-card: 16px;
+  --shadow-soft: 0 1px 2px rgb(12 18 34 / 0.06);
+  --shadow-card: 0 1px 2px rgb(12 18 34 / 0.06), 0 12px 32px rgb(12 18 34 / 0.05);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  background: var(--color-paper);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--color-teal);
+  color: #fff;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-paper),
+    0 0 0 4px var(--color-teal);
+}
+
+#main:focus,
+#main:focus-visible,
+#top:focus,
+#top:focus-visible {
+  box-shadow: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 80;
+  transform: translateY(-160%);
+  border-radius: var(--radius-button);
+  background: var(--color-teal);
+  color: #fff;
+  padding: 0.7rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+.pricing-card {
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 2px rgb(12 18 34 / 0.06),
+    0 16px 40px rgb(12 18 34 / 0.07);
+}
+
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.crossfade {
+  animation: rise-fade 320ms ease;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .crossfade {
+    animation: none;
+  }
+
+  .pricing-card:hover {
+    transform: none;
+  }
+
+  .js .reveal,
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
